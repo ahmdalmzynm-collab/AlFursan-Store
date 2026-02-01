@@ -3,8 +3,9 @@ const path = require('path');
 const app = express();
 
 // كود جوجل - ده أهم حاجة عشان التوثيق
-app.get('/google40843657689849.html', (req, res) => {
-    res.send('google-site-verification: google40843657689849.html');
+app.get('/googlef2bedd81991940c6.html', (req, res) => {
+    res.send('google-site-verification: googlef2bedd81991940c6.html');
+});
 });
 
 // عشان الموقع ميضربش لو الفولدرات تاهت
@@ -16,3 +17,4 @@ app.get('/', (req, res) => {
 });
 
 module.exports = app;
+
