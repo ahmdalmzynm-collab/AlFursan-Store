@@ -2,18 +2,17 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// كود التحقق من جوجل (السطر اللي يهمنا)
+// كود جوجل - ده أهم حاجة عشان التوثيق
 app.get('/google40843657689849.html', (req, res) => {
     res.send('google-site-verification: google40843657689849.html');
 });
 
+// عشان الموقع ميضربش لو الفولدرات تاهت
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
-    res.render('index', { products: [], cartCount: 0 }); // هيفتح صفحة index اللي في فولدر views
+    res.send('<h1>مركز الفرسان شغال بنجاح!</h1><p>جاري تحديث المنتجات...</p>');
 });
 
 module.exports = app;
-const port = process.env.PORT || 3000;
-app.listen(port);
