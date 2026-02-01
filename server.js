@@ -144,4 +144,9 @@ app.post('/place-order', (req, res) => {
 app.listen(port, () => {
     console.log(`🏁 متجر الفرسان شغال على: http://localhost:${port}`);
     console.log(`📍 العنوان: بني سويف - شارع عبد السلام عارف`);
+
+});
+
+app.get('/google*.html', (req, res) => {
+  res.send('google-site-verification: google40843657689849.html'); 
 });
