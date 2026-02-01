@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تم الطلب بنجاح</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta http-equiv="refresh" content="5;url=/" />
+</head>
+<body style="text-align: center; padding-top: 50px;">
+    <div style="background: white; max-width: 500px; margin: auto; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h1 style="color: green;">✔ تم استلام طلبك بنجاح!</h1>
+        <div style="text-align: center; background: white; max-width: 500px; margin: auto; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h1 style="color: green;">✔ تم استلام طلبك بنجاح!</h1>
+    <p>شكراً لك يا هندسة.</p>
+    <p>اضغط على الزرار تحت عشان تبعت تفاصيل طلبك لينا على الواتساب وتأكد الحجز:</p>
+    
+    <a href="https://wa.me/201003644366?text=تم عمل طلب جديد من الموقع باسم: <%= typeof order !== 'undefined' ? order.name : 'عميل جديد' %>" 
+       style="display: inline-block; background: #25d366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 18px;">
+       تأكيد الطلب عبر واتساب 💬
+    </a>
+</div>
+        <p>سيتواصل معك فريق <b>الفرسان</b> قريباً لتأكيد الموعد أو الشحن.</p>
+        <hr>
+        <p>لأي استفسار عاجل: <b>01003644366</b></p>
+        <a href="/" class="buy-btn" style="width: 200px; margin: 20px auto;">العودة للرئيسية</a>
+    </div>
+</body>
+</html>

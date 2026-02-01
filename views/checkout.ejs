@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الطلب | الفرسان</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <a href="/" class="brand-name">الفرسان</a>
+    </header>
+
+    <div style="max-width: 600px; margin: 40px auto; background: white; padding: 20px; border-radius: 5px;">
+        <h2 style="border-bottom: 1px solid #ddd; padding-bottom: 10px;">إتمام طلبك</h2>
+        
+        <div style="display: flex; gap: 20px; margin-bottom: 20px; align-items: center;">
+            <img src="<%= product.img %>" width="80" style="border:1px solid #eee;">
+            <div>
+                <h4><%= product.name %></h4>
+                <p style="color: #B12704; font-weight: bold;"><%= product.price %> ج.م</p>
+            </div>
+        </div>
+
+        <form action="/place-order" method="POST">
+            <input type="hidden" name="productName" value="<%= product.name %>">
+            
+            <label>الاسم بالكامل:</label><br>
+            <input type="text" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            
+            <label>رقم الهاتف:</label><br>
+            <input type="text" name="phone" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            
+            <label>العنوان بالتفصيل:</label><br>
+            <textarea name="address" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></textarea><br>
+
+            <h3 style="margin-top: 20px;">طريقة الدفع</h3>
+            <div style="background: #fdf5e6; padding: 15px; border: 1px solid #f3a847; border-radius: 4px; margin-bottom: 15px;">
+                <input type="radio" id="instapay" name="payment" value="instapay" checked>
+                <label for="instapay" style="font-weight: bold;">InstaPay (إنستا باي)</label>
+                <p style="margin: 5px 25px; font-size: 0.9rem; color: #555;">
+                    قم بتحويل المبلغ على رقم: <b style="font-size: 1.1rem; color: #000;">01003644366</b><br>
+                    ثم ارفع صورة التحويل أو سلمها للمندوب.
+                </p>
+            </div>
+            
+            <div style="padding: 10px;">
+                <input type="radio" id="cod" name="payment" value="cod">
+                <label for="cod">الدفع عند الاستلام (Cash on Delivery)</label>
+            </div>
+
+            <button type="submit" class="buy-btn" style="width: 100%; font-size: 1.1rem;">تأكيد الطلب</button>
+        </form>
+    </div>
+</body>
+</html>

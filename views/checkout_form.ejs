@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>بيانات الشحن | الفرسان</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; padding: 20px; text-align: right; }
+        .form-container { max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .confirm-btn { background: #27ae60; color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>🚚 بيانات استلام الطلب</h2>
+        <form action="/place-order" method="POST">
+            <label>الاسم:</label>
+            <input type="text" name="name" placeholder="اكتب اسمك هنا" required>
+            
+            <label>رقم التليفون:</label>
+            <input type="text" name="phone" placeholder="رقم الموبايل للتواصل" required>
+            
+            <label>العنوان:</label>
+            <input type="text" name="address" value="بني سويف - شارع عبد السلام عارف" required>
+            
+            <button type="submit" class="confirm-btn">تأكيد الأوردر وإرسال واتساب ✅</button>
+        </form>
+    </div>
+</body>
+</html>

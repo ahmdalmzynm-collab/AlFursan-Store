@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الفرسان | إطارات وبطاريات</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+    <div class="container header-content">
+        <div class="logo-area">
+           
+            <p style="color: #febd69; margin: 5px 0 0 0; font-size: 13px;">📍 بني سويف - شارع عبد السلام عارف - أمام مركز المعلومات</p>
+        </div>
+        <div class="cart-area">
+            <a href="/cart" style="text-decoration: none; color: white; font-size: 20px;">
+                🛒 السلة (<span id="cart-count">0</span>)
+            </a>
+        </div>
+    </div>
+</header>
+
+
+    <header>
+        <a href="/" class="brand-name">الفرسان <span>لخدمات السيارات</span></a>
+        <div class="nav-links">
+            <a href="#">الرئيسية</a>
+            <a href="#">خدماتنا</a>
+            <a href="#contact">تواصل معنا</a>
+        </div>
+        <div style="color:white; font-size:0.9rem;">
+            📞 اتصل بنا: 01003644366
+        </div>
+    </header>
+
+    <div class="hero">
+        <h2>خبرة أكثر من 50 عاماً</h2>
+        <p> افضل الاسعار أحدث أجهزة استعدال الجنوط و - بيع إطارات وبطاريات</p>
+    </div>
+
+    <div class="products-container">
+        <% products.forEach(function(product) { %>
+            <div class="product-card">
+                <img src="<%= product.img %>" alt="<%= product.name %>">
+                <div class="product-title"><%= product.name %></div>
+                <div class="product-desc"><%= product.desc %></div>
+                <div class="product-price"><%= product.price %> ج.م</div>
+               <button onclick="addToCart('<%= product.id %>')" class="buy-btn">أضف للسلة 🛒</button>
+            </div>
+        <% }); %>
+    </div>
+
+    <footer id="contact">
+        <h3>مركز الفرسان لخدمة الإطارات والبطاريات</h3>
+        <p>معدات حديثة - دقة في العمل - أسعار تنافسية</p>
+        <div class="contact-info">
+            للتواصل والدفع عبر InstaPay:<br>
+            01003644366
+        </div>
+        <p>نقبل الدفع عند الاستلام أو عبر المحافظ الإلكترونية</p>
+    </footer>
+<script>
+function addToCart(productId) {
+    // بيبعت الطلب للسيرفر في "السر" من غير ما الصفحة تحس
+    fetch('/add-to-cart/' + productId)
+        .then(response => response.json())
+        .then(data => {
+            // تحديث العداد اللي فوق فوراً
+            document.getElementById('cart-count').innerText = data.cartCount;
+            
+            // تنبيه بسيط للزبون إن المنتج اتضاف
+            alert('تم إضافة المنتج للسلة بنجاح! ✅');
+        })
+        .catch(err => console.error('خطأ في إضافة المنتج'));
+}
+</script>
+</body>
+</html>

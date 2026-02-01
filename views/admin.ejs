@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5"> <title>لوحة تحكم الفرسان | الإدارة</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; text-align: right; }
+        .admin-container { max-width: 1100px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { color: #131921; border-bottom: 3px solid #febd69; padding-bottom: 10px; margin-bottom: 20px; }
+        
+        /* تنسيق فورم إضافة المنتجات */
+        .add-product-box { background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 30px; }
+        .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; box-sizing: border-box; }
+        .btn-add { background: #27ae60; color: white; border: none; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 5px; grid-column: 1 / -1; }
+        
+        /* تنسيق الجداول */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; border: 1px solid #eee; text-align: center; }
+        th { background: #232f3e; color: white; }
+        .order-row { background: #fffdf0; border-right: 5px solid #e67e22; }
+        .product-img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; }
+        .delete-btn { background: #ff4d4d; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="admin-container">
+    <h1>لوحة إدارة مركز الفرسان 🏁</h1>
+    <p>📍 بني سويف - شارع عبد السلام عارف | <span style="color: green;">الموقع متصل الآن ويتم التحديث كل 5 ثواني</span></p>
+
+    <div class="add-product-box">
+        <h3>➕ إضافة صنف جديد للمخزن</h3>
+        <form action="/add-product" method="POST" class="grid-form">
+            <input type="text" name="name" placeholder="اسم المنتج (مثلاً: كاوتش لاسا)" required>
+            <input type="number" name="price" placeholder="السعر" required>
+            <input type="text" name="size" placeholder="المقاس" required>
+            <select name="category">
+                <option value="إطارات">إطارات</option>
+                <option value="بطاريات">بطاريات</option>
+                <option value="جنوط">جنوط</option>
+            </select>
+            <input type="text" name="img" placeholder="رابط صورة المنتج (URL)">
+            <button type="submit" class="btn-add">تأكيد إضافة المنتج للمتجر ✅</button>
+        </form>
+    </div>
+
+    <div style="margin-top: 40px;">
+        <h3 style="color: #e67e22;">📥 طلبات الزبائن (الأوردرات)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>الوقت</th>
+                    <th>الزبون</th>
+                    <th>الموبايل</th>
+                    <th>الطلبات</th>
+                    <th>العنوان</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (orders && orders.length > 0) { %>
+    <% orders.reverse().forEach(order => { %>
+        <tr class="order-row">
+            <td><%= order.date %></td>
+            <td><b><%= order.name %></b></td>
+            <td><a href="tel:<%= order.phone %>"><%= order.phone %></a></td>
+            <td>
+                <% if (order.items && Array.isArray(order.items)) { %>
+                    <% order.items.forEach(item => { %>
+                        • <%= item.name %> (<%= item.size %>)<br>
+                    <% }) %>
+                <% } else { %>
+                    <span style="color: red;">طلب قديم (بدون سلة)</span>
+                <% } %>
+            </td>
+            <td><%= order.address %></td>
+        </tr>
+    <% }) %>
+<% } else { %>
+    <tr><td colspan="5">لا يوجد طلبات جديدة حتى الآن</td></tr>
+<% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 40px;">
+        <h3 style="color: #7f8c8d;">📦 بضاعة المحل الحالية</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>الصورة</th>
+                    <th>الاسم</th>
+                    <th>المقاس</th>
+                    <th>السعر</th>
+                    <th>تحكم</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(p => { %>
+                    <tr>
+                        <td><img src="<%= p.img %>" class="product-img" onerror="this.src='https://via.placeholder.com/50'"></td>
+                        <td><%= p.name %></td>
+                        <td><%= p.size %></td>
+                        <td><%= p.price %> ج.م</td>
+                        <td><a href="/delete-product/<%= p.id %>" class="delete-btn" onclick="return confirm('هل تريد مسح هذا الصنف؟')">حذف</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
